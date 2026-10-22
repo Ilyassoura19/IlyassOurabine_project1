@@ -1,0 +1,36 @@
+sequenceDiagram
+    autonumber
+    actor U as User (Ilyass)
+    participant CA as ClientApp (view)
+    participant CC as ChatClient (model)
+    participant SS as ServerSocket
+    participant H as ClientHandler<br/>(virtual thread)
+    participant CS as ChatServer
+    participant O as Other clients
+
+    U->>CA: types username, JOIN
+    CA->>CC: connect(ip, port, "Ilyass")
+    CC->>SS: new Socket(ip, port)
+    SS-->>CS: accept() returns socketForClient
+    CS->>H: Thread.ofVirtual().start(handler)
+    CC->>H: writeUTF("Ilyass")
+    H->>CS: register(handler, "Ilyass")
+    H-->>CC: writeUTF("Welcome Ilyass!")
+    Note over CC: listener thread loops on readUTF()
+
+    U->>CA: "hi" + SEND / Enter
+    CA->>CC: send("hi")
+    CC->>H: writeUTF("hi")
+    H->>CS: broadcast("[14:05] Ilyass: hi")
+    CS-->>CC: writeUTF(...)
+    CS-->>O: writeUTF(...)
+
+    U->>CA: "allUsers"
+    CC->>H: writeUTF("allUsers")
+    H-->>CC: "Active users: Ilyass, Sara" (only this client)
+
+    U->>CA: LEAVE (or "bye" / "end")
+    CC->>H: writeUTF("bye")
+    CC->>CC: socket.close()
+    H->>CS: unregister(handler)
+    CS-->>O: "<< Ilyass left the chat"

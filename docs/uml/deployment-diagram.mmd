@@ -1,0 +1,28 @@
+flowchart TB
+    subgraph SM["«device» Server machine"]
+        subgraph JVM1["«execution environment» JVM (Java 22)"]
+            SJ["«artifact»<br/>TCPServer.jar"]
+            SC["«artifact»<br/>config.properties<br/>server.ip / server.port"]
+        end
+        SS(("ServerSocket<br/>port 3000"))
+        SJ --- SS
+        SC -.-> SJ
+    end
+    subgraph C1["«device» Client machine 1"]
+        subgraph JVM2["«execution environment» JVM"]
+            CJ1["«artifact»<br/>TCPClient.jar"]
+        end
+    end
+    subgraph C2["«device» Client machine 2"]
+        subgraph JVM3["«execution environment» JVM"]
+            CJ2["«artifact»<br/>TCPClient.jar"]
+        end
+    end
+    subgraph C3["«device» Client machine N"]
+        subgraph JVM4["«execution environment» JVM"]
+            CJ3["«artifact»<br/>TCPClient.jar"]
+        end
+    end
+    CJ1 <== "TCP/IP<br/>socket" ==> SS
+    CJ2 <== "TCP/IP<br/>socket" ==> SS
+    CJ3 <== "TCP/IP<br/>socket" ==> SS

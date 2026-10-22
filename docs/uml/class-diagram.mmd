@@ -1,0 +1,61 @@
+classDiagram
+    direction LR
+    namespace TCPServer_model {
+        class ChatServer {
+            -ServerConfig config
+            -ServerListener listener
+            -List~ClientHandler~ clients
+            -ServerSocket serverSocket
+            +start()
+            +stop()
+            -acceptClients()
+            ~register(ClientHandler, String) String
+            ~unregister(ClientHandler)
+            ~broadcast(String)
+            ~format(String, String) String
+            ~getActiveUsernames() List~String~
+        }
+        class ClientHandler {
+            -Socket socketForClient
+            -DataOutputStream dout
+            -String username
+            -boolean readOnly
+            +run()
+            ~send(String)
+            ~close()
+        }
+        class ServerConfig {
+            -String ip
+            -int port
+            +load()$ ServerConfig
+        }
+        class ServerListener {
+            <<interface>>
+            +onLog(String)
+            +onUserJoined(String)
+            +onUserLeft(String)
+        }
+    }
+    namespace TCPServer_view {
+        class ServerApp {
+            -TextArea logArea
+            -ObservableList~String~ users
+            -Map~String,String~ userColors
+            +start(Stage)
+        }
+        class TCPServer {
+            +main(String[])$
+        }
+    }
+    class Runnable {
+        <<interface>>
+        +run()
+    }
+    ChatServer "1" o-- "*" ClientHandler : clients
+    ClientHandler ..|> Runnable
+    ClientHandler --> ChatServer : server
+    ChatServer --> ServerConfig
+    ChatServer --> ServerListener : notifies
+    ServerApp ..|> ServerListener
+    ServerApp --> ChatServer : creates
+    TCPServer ..> ServerApp : launches

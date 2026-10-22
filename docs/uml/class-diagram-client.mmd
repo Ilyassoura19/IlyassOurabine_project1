@@ -1,0 +1,48 @@
+classDiagram
+    direction LR
+    namespace TCPClient_model {
+        class ChatClient {
+            -ClientListener listener
+            -Socket socket
+            -DataInputStream dis
+            -DataOutputStream dout
+            -String username
+            -boolean readOnly
+            -boolean connected
+            +connect(String, int, String)
+            -receiveMessages()
+            +send(String)
+            +leave()
+            -disconnect(String)
+            +isReadOnly() boolean
+        }
+        class ClientConfig {
+            -String ip
+            -int port
+            +resolve(List~String~)$ ClientConfig
+        }
+        class ClientListener {
+            <<interface>>
+            +onMessage(String)
+            +onDisconnected(String)
+        }
+    }
+    namespace TCPClient_view {
+        class ClientApp {
+            -ChatClient client
+            -TextArea messagesArea
+            -TextField inputField
+            -Circle statusCircle
+            +start(Stage)
+            -buildLoginScene() Scene
+            -buildChatScene() Scene
+        }
+        class TCPClient {
+            +main(String[])$
+        }
+    }
+    ChatClient --> ClientListener : notifies
+    ClientApp ..|> ClientListener
+    ClientApp *-- ChatClient
+    ClientApp ..> ClientConfig : uses
+    TCPClient ..> ClientApp : launches
