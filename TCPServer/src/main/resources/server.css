@@ -1,0 +1,35 @@
+.root-pane {
+    -fx-background-color: #f5f6fa;
+    -fx-font-family: "System";
+    -fx-font-size: 13px;
+}
+
+.title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #312e81;
+}
+
+.status {
+    -fx-text-fill: #15803d;
+    -fx-font-weight: bold;
+}
+
+.section {
+    -fx-font-weight: bold;
+    -fx-text-fill: #4b5563;
+}
+
+.text-area {
+    -fx-font-family: "Monospaced";
+}
+
+.list-view {
+    -fx-background-radius: 6;
+}
+
+.list-cell {
+    -fx-padding: 8 10 8 10;
+    -fx-background-insets: 2;
+    -fx-background-radius: 6;
+}
