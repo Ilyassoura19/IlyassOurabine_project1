@@ -14,6 +14,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -132,6 +133,7 @@ public class ClientApp extends Application implements ClientListener {
 
         Label identity = new Label(client.isReadOnly() ? "READ-ONLY MODE" : "Logged in as " + client.getUsername());
         identity.getStyleClass().add(client.isReadOnly() ? "badge-readonly" : "identity");
+        identity.setMinWidth(Region.USE_PREF_SIZE); // never truncate the label
 
         grid.add(status, 0, 0);
         grid.add(identity, 1, 0, 2, 1);
@@ -143,7 +145,7 @@ public class ClientApp extends Application implements ClientListener {
         grid.add(messagesArea, 0, 1, 3, 1);
 
         // row 2: input + SEND + LEAVE
-        inputField.setPromptText("Type a message (allUsers = who is online, end / bye = leave)");
+        inputField.setPromptText("Type a message...   (commands: allUsers, end, bye)");
         sendButton.getStyleClass().add("primary");
         leaveButton.getStyleClass().add("danger");
         grid.add(inputField, 0, 2);
