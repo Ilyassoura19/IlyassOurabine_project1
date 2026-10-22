@@ -1,0 +1,63 @@
+.root-pane {
+    -fx-background-color: #f5f6fa;
+    -fx-font-family: "System";
+    -fx-font-size: 13px;
+}
+
+.title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0f766e;
+}
+
+.hint {
+    -fx-text-fill: #6b7280;
+    -fx-font-size: 12px;
+}
+
+.status-online {
+    -fx-text-fill: #15803d;
+    -fx-font-weight: bold;
+}
+
+.status-offline {
+    -fx-text-fill: #b91c1c;
+    -fx-font-weight: bold;
+}
+
+.identity {
+    -fx-text-fill: #374151;
+}
+
+.badge-readonly {
+    -fx-background-color: #fef3c7;
+    -fx-text-fill: #92400e;
+    -fx-padding: 3 10 3 10;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+}
+
+.text-area {
+    -fx-font-size: 13px;
+}
+
+.text-field {
+    -fx-pref-height: 32px;
+}
+
+.button {
+    -fx-pref-height: 32px;
+    -fx-background-radius: 6;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.primary {
+    -fx-background-color: #0f766e;
+    -fx-text-fill: white;
+}
+
+.danger {
+    -fx-background-color: #dc2626;
+    -fx-text-fill: white;
+}
